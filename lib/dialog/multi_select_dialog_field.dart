@@ -412,7 +412,7 @@ class __MultiSelectDialogFieldViewState<V>
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                widget.buttonText ?? Text("Select"),
+                Flexible(child: widget.buttonText ?? Text("Select")),
                 widget.buttonIcon ?? Icon(Icons.arrow_downward),
               ],
             ),
