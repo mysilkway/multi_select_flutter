@@ -409,12 +409,10 @@ class __MultiSelectBottomSheetFieldViewState<V>
   void didUpdateWidget(_MultiSelectBottomSheetFieldView oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.initialValue != _selectedItems) {
-      setState(() {
-        _selectedItems = widget.initialValue;
-      });
       if (widget.state != null) {
         widget.state.didChange(widget.initialValue);
       }
+      _selectedItems = widget.initialValue;
     }
   }
 
