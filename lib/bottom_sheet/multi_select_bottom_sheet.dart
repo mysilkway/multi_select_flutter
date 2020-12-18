@@ -205,6 +205,16 @@ class _MultiSelectBottomSheetState<V> extends State<MultiSelectBottomSheet<V>> {
   }
 
   @override
+  void didUpdateWidget(MultiSelectBottomSheet oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.initialValue != _selectedValues) {
+      setState(() {
+        _selectedValues = widget.initialValue;
+      });
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       padding:

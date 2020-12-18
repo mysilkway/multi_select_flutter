@@ -406,6 +406,16 @@ class __MultiSelectBottomSheetFieldViewState<V>
   }
 
   @override
+  void didUpdateWidget(_MultiSelectBottomSheetFieldView oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.initialValue != _selectedItems) {
+      setState(() {
+        _selectedItems = widget.initialValue;
+      });
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
