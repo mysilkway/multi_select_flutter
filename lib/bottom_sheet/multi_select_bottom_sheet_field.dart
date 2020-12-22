@@ -493,6 +493,7 @@ class __MultiSelectBottomSheetFieldViewState<V>
             : Container(),
         widget.state != null && widget.state.hasError
             ? Row(
+                textDirection: widget.errorTextDirection,
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.only(left: 4),
