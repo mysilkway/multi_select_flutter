@@ -188,6 +188,10 @@ class MultiSelectBottomSheetField<V> extends FormField<List<V>> {
                 selectedColor: selectedColor,
                 shape: shape,
                 checkColor: checkColor,
+                errorMaxLines: errorMaxLines,
+                errorTextDirection: errorTextDirection,
+                errorStyle: errorStyle,
+                errorDecoration: errorDecoration,
               );
               return _MultiSelectBottomSheetFieldView<V>._withState(
                   view, state);
