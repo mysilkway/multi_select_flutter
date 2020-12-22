@@ -99,6 +99,11 @@ class MultiSelectBottomSheetField<V> extends FormField<List<V>> {
   /// Set the color of the check in the checkbox
   final Color checkColor;
 
+  final TextStyle errorStyle;
+  final int errorMaxLines;
+  final TextDirection errorTextDirection;
+  final BoxDecoration errorDecoration;
+
   final AutovalidateMode autovalidateMode;
   final FormFieldValidator<List<V>> validator;
   final FormFieldSetter<List<V>> onSaved;
@@ -140,6 +145,10 @@ class MultiSelectBottomSheetField<V> extends FormField<List<V>> {
     this.onSaved,
     this.validator,
     this.autovalidateMode = AutovalidateMode.disabled,
+    this.errorStyle,
+    this.errorMaxLines,
+    this.errorTextDirection,
+    this.errorDecoration,
   }) : super(
             key: key,
             onSaved: onSaved,
@@ -217,6 +226,10 @@ class _MultiSelectBottomSheetFieldView<V> extends StatefulWidget {
   final TextStyle searchTextStyle;
   final TextStyle searchHintStyle;
   final Color checkColor;
+  final TextStyle errorStyle;
+  final int errorMaxLines;
+  final TextDirection errorTextDirection;
+  final BoxDecoration errorDecoration;
   FormFieldState<List<V>> state;
 
   _MultiSelectBottomSheetFieldView({
@@ -250,6 +263,10 @@ class _MultiSelectBottomSheetFieldView<V> extends StatefulWidget {
     this.searchHintStyle,
     this.selectedItemsTextStyle,
     this.checkColor,
+    this.errorStyle,
+    this.errorMaxLines,
+    this.errorTextDirection,
+    this.errorDecoration,
   });
 
   /// This constructor allows a FormFieldState to be passed in. Called by MultiSelectBottomSheetField.
@@ -285,6 +302,10 @@ class _MultiSelectBottomSheetFieldView<V> extends StatefulWidget {
         searchTextStyle = field.searchTextStyle,
         selectedItemsTextStyle = field.selectedItemsTextStyle,
         checkColor = field.checkColor,
+        errorStyle = field.errorStyle,
+        errorMaxLines = field.errorMaxLines,
+        errorTextDirection = field.errorTextDirection,
+        errorDecoration = field.errorDecoration,
         state = state;
 
   @override
@@ -426,27 +447,31 @@ class __MultiSelectBottomSheetFieldViewState<V>
           },
           child: Container(
             decoration: widget.state != null
-                ? widget.decoration ??
-                    BoxDecoration(
-                      border: Border(
-                        bottom: BorderSide(
-                          color: widget.state != null && widget.state.hasError
-                              ? Colors.red.shade800.withOpacity(0.6)
-                              : _selectedItems.isNotEmpty
-                                  ? (widget.selectedColor != null &&
-                                          widget.selectedColor !=
-                                              Colors.transparent)
-                                      ? widget.selectedColor
-                                      : Theme.of(context).primaryColor
-                                  : Colors.black45,
-                          width: _selectedItems.isNotEmpty
-                              ? (widget.state != null && widget.state.hasError)
-                                  ? 1.4
-                                  : 1.8
-                              : 1.2,
-                        ),
-                      ),
-                    )
+                ? (widget.state.hasError && widget.errorDecoration != null
+                    ? widget.errorDecoration
+                    : widget.decoration ??
+                        BoxDecoration(
+                          border: Border(
+                            bottom: BorderSide(
+                              color:
+                                  widget.state != null && widget.state.hasError
+                                      ? Colors.red.shade800.withOpacity(0.6)
+                                      : _selectedItems.isNotEmpty
+                                          ? (widget.selectedColor != null &&
+                                                  widget.selectedColor !=
+                                                      Colors.transparent)
+                                              ? widget.selectedColor
+                                              : Theme.of(context).primaryColor
+                                          : Colors.black45,
+                              width: _selectedItems.isNotEmpty
+                                  ? (widget.state != null &&
+                                          widget.state.hasError)
+                                      ? 1.4
+                                      : 1.8
+                                  : 1.2,
+                            ),
+                          ),
+                        ))
                 : widget.decoration,
             padding: EdgeInsets.all(10),
             child: Row(
@@ -469,10 +494,13 @@ class __MultiSelectBottomSheetFieldViewState<V>
                     padding: const EdgeInsets.only(left: 4),
                     child: Text(
                       widget.state.errorText,
-                      style: TextStyle(
-                        color: Colors.red[800],
-                        fontSize: 12.5,
-                      ),
+                      style: widget.errorStyle ??
+                          TextStyle(
+                            color: Colors.red[800],
+                            fontSize: 12.5,
+                          ),
+                      maxLines: widget.errorMaxLines,
+                      textDirection: widget.errorTextDirection,
                     ),
                   ),
                 ],
