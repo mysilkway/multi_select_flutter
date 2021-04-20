@@ -432,7 +432,7 @@ class __MultiSelectBottomSheetFieldViewState<V>
   }
 
   @override
-  void didUpdateWidget(_MultiSelectBottomSheetFieldView oldWidget) {
+  void didUpdateWidget(_MultiSelectBottomSheetFieldView<V> oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.initialValue != _selectedItems) {
       setState(() {

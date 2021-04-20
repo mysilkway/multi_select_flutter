@@ -205,11 +205,11 @@ class _MultiSelectBottomSheetState<V> extends State<MultiSelectBottomSheet<V>> {
   }
 
   @override
-  void didUpdateWidget(MultiSelectBottomSheet oldWidget) {
+  void didUpdateWidget(MultiSelectBottomSheet<V> oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.initialValue != _selectedValues) {
       setState(() {
-        _selectedValues = widget.initialValue;
+        _selectedValues = widget.initialValue!;
       });
     }
   }
