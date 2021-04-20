@@ -194,8 +194,8 @@ class MultiSelectBottomSheetField<V> extends FormField<List<V>> {
                 errorStyle: errorStyle,
                 errorDecoration: errorDecoration,
               );
-              return _MultiSelectBottomSheetFieldView<V?>._withState(
-                  view as _MultiSelectBottomSheetFieldView<V?>, state);
+              return _MultiSelectBottomSheetFieldView<V>._withState(
+                  view as _MultiSelectBottomSheetFieldView<V>, state);
             });
 }
 
